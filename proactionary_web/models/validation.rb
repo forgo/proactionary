@@ -98,21 +98,6 @@ def valid_single_lowercase_character? (label)
 	return true
 end
 
-# Promoter Specific Validations
-def valid_promoter_name? ( name )
-	return false if 	name.nil?
-	return false unless name.is_a?(String)
-	return false if 	(name =~ REGEX_LABEL) == nil
-	return true
-end
-
-def valid_promoter_slogan? ( slogan )
-	return false if 	slogan.nil?
-	return false unless slogan.is_a?(String)
-	return false if 	(slogan =~ REGEX_LABEL) == nil
-	return true
-end
-
 def valid_address? ( address )
 	return false if 	address.nil?
 	return false unless address.is_a?(String)
@@ -139,20 +124,5 @@ def valid_hex_color? ( hex )
 	return false if 	hex.nil?
 	return false unless hex.is_a?(String)
 	return false if 	(hex =~ REGEX_HEX_COLOR) == nil
-	return true
-end
-
-# Event Specific Validations
-def valid_event_name? ( name )
-	return false if 	name.nil?
-	return false unless name.is_a?(String)
-	return false if 	(name =~ REGEX_LABEL) == nil
-	return true
-end
-
-def valid_event_description? ( description )
-	return false if 	description.nil?
-	return false unless description.is_a?(String)
-	return false if 	(description =~ REGEX_LABEL) == nil
 	return true
 end

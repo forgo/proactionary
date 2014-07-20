@@ -22,7 +22,6 @@ require_relative 'models/models'
 require_relative 'utilities'
 require_relative 'helpers'
 require_relative 'routes/sessions'
-require_relative 'routes/promoter'
 require_relative 'routes/facebook'
 
 class ProactionaryApp < Sinatra::Base
@@ -32,7 +31,6 @@ class ProactionaryApp < Sinatra::Base
 	end
 
 	register Sinatra::ProactionaryApp::Routing::Sessions
-	register Sinatra::ProactionaryApp::Routing::Promoter
 	register Sinatra::ProactionaryApp::Routing::Facebook
 
 	helpers Sinatra::ContentFor2
