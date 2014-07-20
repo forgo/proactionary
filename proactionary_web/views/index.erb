@@ -1,0 +1,51 @@
+<%
+#-------------------------------------------------------------------------------
+# PROACTIONARY.COM
+#-------------------------------------------------------------------------------
+# index.erb
+# ------------------------------------------------------------------------------
+# Author: 	Elliott Richerson
+# Created:  July 20, 2014
+# Modified: July 20, 2014
+# ------------------------------------------------------------------------------
+%>
+
+<% content_for :css do %>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<% end %>
+
+<% content_for :javascript do %>
+	<script src="/js/ready.js"></script>
+	<script src="/js/proactionary.js"></script>
+<% end %>
+
+<% content_for :header do %>
+	<header>
+		<h1>Proactionary!</h1>
+		<p>There are worlds happening all around you.</p>
+	</header> 
+<% end %>
+
+<% content_for :footer do %>
+	<footer>
+		Designed by Elliott Richerson<br />
+		Thought-baby of Chelsea MacMillan
+	</footer> 
+<% end %>
+
+
+<p>Content goes here...</p>
+
+<% DB.getKarmaLevels().each do |k| %>
+
+<%= k["level"] %>
+
+<% end %>
+
+
+<script>
+	ready(function(){
+		'use strict';
+		Proactionary.hello();
+	});
+</script>

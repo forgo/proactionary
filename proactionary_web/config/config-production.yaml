@@ -1,0 +1,13 @@
+# Server options:
+address: 127.0.0.1
+port: 20997
+
+# Adapter options:
+environment: production
+
+# Daemon options:
+daemonize: true
+user: elliott
+group: elliott
+
+# See `thin -h` for more options

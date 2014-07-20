@@ -1,0 +1,31 @@
+<%
+#-------------------------------------------------------------------------------
+# PROACTIONARY.COM
+#-------------------------------------------------------------------------------
+# index.erb
+# ------------------------------------------------------------------------------
+# Author: 	Elliott Richerson
+# Created:  July 20, 2014
+# Modified: July 20, 2014
+# ------------------------------------------------------------------------------
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Proactionary</title>
+
+  <%= yield_content :css %>
+  <%= yield_content :javascript %>
+
+</head>
+
+<body>
+
+  <%= yield_content :header %>
+  <%= yield %>
+  <%= yield_content :footer %>
+
+</body>
+</html>

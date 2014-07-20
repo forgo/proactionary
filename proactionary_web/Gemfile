@@ -1,0 +1,37 @@
+#-------------------------------------------------------------------------------
+# PROACTIONARY.COM
+#-------------------------------------------------------------------------------
+# Gemfile
+# ------------------------------------------------------------------------------
+# Author: 	Elliott Richerson
+# Created:  July 20, 2014
+# Modified: July 20, 2014
+# ------------------------------------------------------------------------------
+
+source 'https://rubygems.org'
+
+gem 'sinatra'						# The Framework
+gem 'mysql2'						# The Database
+gem 'sinatra-contrib'				# Reloader
+
+gem 'json'							# JSON implementation as a Ruby extension in C
+gem 'koala'							# Ruby SDK for Facebook
+gem 'geocoder'						# Geocoding by Street or IP Address
+gem 'neography'						# Neo4j Graph DB Rest API
+gem 'thin'
+
+gem 'sinatra-content-for2'
+gem 'shotgun'					# Reloading Rack Development Server
+gem 'tux'						# Console to Run Ruby Code in App/DB Environment
+gem 'random-word'
+
+group :test, :development do
+	gem 'rack-test'					# Testing API for Rack (Shotgun) Apps
+	gem 'rspec'						# BDD for Ruby
+	gem 'net-ssh'
+	gem 'highline'
+end
+
+group :development do
+
+end

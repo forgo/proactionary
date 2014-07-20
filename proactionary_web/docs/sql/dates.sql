@@ -1,0 +1,17 @@
+
+-- GENERATE RANDOM START TIMESTAMP BETWEEN NOW() and 30 DAYS FROM NOW()
+--  AND STOP TIMESTAMP BETWEEN (NOW() + 30 DAYS) and (30 DAYS + 1 DAY)
+SET @vstart_range_days = 30;
+SET @vstart_range_to_end = 1;
+SET @vstart = FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP(NOW() + INTERVAL @cstart_range_days DAY) - UNIX_TIMESTAMP(NOW())) + UNIX_TIMESTAMP(NOW()));
+
+-- PREVIEW THE RANDOMIZED TIMESTAMPS FOR SANITY CHECK
+SELECT @vstart AS start,
+FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP(@vstart + INTERVAL @vstart_range_to_end DAY) - UNIX_TIMESTAMP(@vstart)) + UNIX_TIMESTAMP(@vstart)) AS end; 
+
+
+-- ACTUAL UPDATE TO TABLE HERE
+UPDATE table
+SET 
+start_ts = (@vstart := FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP(NOW() + INTERVAL @vstart_range_days DAY) - UNIX_TIMESTAMP(NOW())) + UNIX_TIMESTAMP(NOW()))),
+end_ts = FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP(@vstart + INTERVAL @vstart_range_to_end DAY) - UNIX_TIMESTAMP(@vstart)) + UNIX_TIMESTAMP(@vstart));

@@ -1,0 +1,9 @@
+# These directories are created by Thin when `rake:thin start` is invoked
+log/
+tmp/
+Gemfile.lock
+*.swp
+*.rbc
+*.sass-cache
+.DS_STORE
+

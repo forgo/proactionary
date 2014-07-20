@@ -1,0 +1,101 @@
+#-------------------------------------------------------------------------------
+# PROACTIONARY.COM
+#-------------------------------------------------------------------------------
+# Rakefile
+# ------------------------------------------------------------------------------
+# Author: 	Elliott Richerson
+# Created:  July 20, 2014
+# Modified: July 20, 2014
+# ------------------------------------------------------------------------------
+require 'rspec/core/rake_task'
+require './app'
+
+ENV['RACK_ENV'] ||= 'development'					# Default Environment
+
+# Help For Rake Tasks
+task :default => :help
+ 
+desc "Show help menu"
+task :help do
+	puts "Available rake tasks: "
+	puts "rake thin:start - Start App"
+	puts "rake thin:stop - Stop App"
+	puts "rake thin:restart - Restart App"
+	puts "rake deploy - Deploy to webfaction"
+	puts "rake specs - Run specs and calculate coverage"
+end
+
+RSpec::Core::RakeTask.new :specs do |task|
+	task.pattern = Dir['spec/**/*_spec.rb']
+end
+
+task :default => ['specs']
+
+#####
+
+namespace :thin do
+
+	desc 'Start the app'
+	task :start do
+		puts 'Starting...' + Sinatra::Application.environment.to_s
+		system "bundle exec thin -s 1 -C config/config-#{Sinatra::Application.environment}.yaml -R config.ru start"
+		puts 'Started!'
+	end
+
+	desc 'Stop the app'
+	task :stop do
+		puts 'Stopping...'
+		pids = File.join(File.dirname(__FILE__), 'tmp/pids')
+		if File.directory?(pids)
+			Dir.new(pids).each do |file|
+				prefix = file.to_s
+				if prefix[0, 4] == 'thin'
+					puts "Stopping the server on port #{file[/\d+/]}..."
+					system "bundle exec thin stop -Ptmp/pids/#{file}"
+				end
+			end
+		end
+		puts 'Stopped!'
+	end
+
+	desc 'Restart the application'
+	task :restart do
+		puts 'Restarting...'
+		Rake::Task['thin:stop'].invoke
+		Rake::Task['thin:start'].invoke
+		puts 'Restarted!'
+	end
+
+end
+
+# Deploy to Remote Server
+user = 'elliott'
+app_name = 'proactionary'
+app_dir = "/home/#{user}/webapps/#{app_name}"
+proj_dir = "site"
+desc 'Deploy to server'
+task :deploy do |t, args|
+	puts 'Deploying to server...'
+	success = system "rsync --exclude-from .excludes -rltvz -e ssh . #{user}@#{user}.webfactional.com:#{app_dir}/#{proj_dir}"
+	if success
+		require 'net/ssh'
+		require 'highline/import'
+
+		pword = ask("Enter your password:  ") { |q| q.echo = false }
+
+		Net::SSH.start("#{user}.webfactional.com", user, :password => pword) do |ssh|
+			commands = [
+			'export RACK_ENV=production',
+			"export GEM_HOME=#{app_dir}/gems",
+			"export RUBYLIB=#{app_dir}/lib",
+			"export PATH=#{app_dir}/bin:$PATH",
+			"cd #{app_dir}/#{proj_dir}",
+			'bundle install --without=development',
+			'rake thin:restart',
+			'stop',
+			'start'
+			].join ' && '
+			ssh.exec commands
+		end
+	end
+end
