@@ -5,7 +5,7 @@ require './models/validation'
 class DB
 
 	if ENV['RACK_ENV'] == "production"
-		@@mysqlclient = Mysql2::Client.new(:host => "localhost", :username => "proactionary_us", :password => "wifmitotmmctmswowlib", :database => "proactionary", :reconnect => true)
+		@@mysqlclient = Mysql2::Client.new(:host => "localhost", :username => "proactionary_u", :password => "wifmitotmmctmswowlib", :database => "proactionary", :reconnect => true)
 	else
 		@@mysqlclient = Mysql2::Client.new(:host => "localhost", :username => "root", :password => "password", :database => "proactionary")
 	end
