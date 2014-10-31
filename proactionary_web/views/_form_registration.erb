@@ -1,0 +1,13 @@
+<div >Promoter Registration Form</div>
+<form method="Post" action="/register">
+Name: <input maxlength="128" type="text" name="promoterName" value="Enter Name"/> <br>
+Category: <select name="promoterCategory"><%= promoter_category_form %></select><br>
+Slogan: <input maxlength="128" type="text" name="promoterSlogan" value="Enter Slogan"/><br>
+Street Address: <input maxlength="128" type="text" name="promoterStreet" value="Enter Street Number"/><br>
+City: <input maxlength="128" type="text" name="promoterCity" value="Enter City"/><br>
+State: <select name="promoterState"><%= promoter_state_form %></select><br>
+Zip: <input maxlength="5" type="text" name="promoterZip" value="Enter Zip Code"/><br>
+Country: <input maxlength="128" type="text" name="promoterCountry" value="USA"/><br>
+Phone: <input maxlength="11" type="text" name="promoterPhone" value="Enter Phone Number"/><br>
+<input type="submit" value="submit" />
+</form>

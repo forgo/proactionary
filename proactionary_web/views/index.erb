@@ -11,41 +11,95 @@
 %>
 
 <% content_for :css do %>
+	<link rel="stylesheet" type="text/css" href="/css/header.css" />
+
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+	<link rel="stylesheet" type="text/css" href="/css/pikaday.css">
+	<link rel="stylesheet" type="text/css" href="/css/modal.css">
 <% end %>
 
 <% content_for :javascript do %>
+	<script src="/js/JHR.js"></script>
 	<script src="/js/ready.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="/js/pikaday.js"></script>
 	<script src="/js/proactionary.js"></script>
+	<script src="/js/Geometry.js"></script>
+	<script src="/js/GMaps.js"></script>
+	<script src="/js/Events.js"></script>
 <% end %>
 
 <% content_for :header do %>
+	<div id="top-panel">
+		<%= header %>
+	</div>
 	<header>
-		<h1>Proactionary!</h1>
-		<p>There are worlds happening all around you.</p>
+		<form id="event_filter_form">
+			<fieldset id="event_filter_form_fieldset">
+				<div id="top">  
+					<nav id="topmenu">  
+						<ul>  
+							<li>Category<span class="arrow">More Link</span>
+								<ul id="event_category" class="sublist sublistclicked" onclick="Events.updateCategory(event)">  
+									<%= event_category %>
+								</ul> 
+							</li>  
+							<li>Distance<span class="arrow">More Link</span>
+								<ul id="event_range" class="sublist" onclick="Events.updateRange(event)">  
+									<%= event_range %>
+								</ul> 
+							</li>   
+							<li>
+							</li> 
+							<li>Option<span class="arrow">More Link</span>
+								<ul id="event_date_option" class="sublist" onclick="Events.updateDateOption(event)">
+									<%= event_date_option %>
+								</ul>
+							</li>
+							<li id="date1">Start<button id="date1-trigger" type='button'></button><span class="arrow">More Link</span></li>
+							<li id="date2">End<button id="date2-trigger" type='button'></button><span class="arrow">More Link</span></li>
+						</ul>  
+					</nav>
+					<span id="events_spinner"><%= events_spinner %></span>
+				</div>
+				<input id="date1-field" type="hidden"></input>
+				<input id="date2-field" type="hidden"></input>
+			</fieldset>
+		</form>
+		<div id="info-panel">
+			<span id="filter-description">Searching for events...</span>
+			<span id="event-count-description">0 events found.</span>
+		</div>
 	</header> 
 <% end %>
 
-<% content_for :footer do %>
-	<footer>
-		Designed by Elliott Richerson<br />
-		Thought-baby of Chelsea MacMillan
-	</footer> 
+
+<div id="event_map">
+	<div id="map-canvas"></div>
+</div>
+<br />
+
+<% content_for :sidebar do %>
+	<div id="sidebar">
+		<div id="sidebar-content">
+			<%= events_list_sidebar(@request) %>
+		</div>
+	</div>
 <% end %>
 
-
-<p>Content goes here...</p>
-
-<% DB.getKarmaLevels().each do |k| %>
-
-<%= k["level"] %>
-
+<% content_for :modal do %>
+	<%= modal("openModalLogin", form_login) %>
+	<%= modal("openModalLogout", "Logout Modal") %>
+	<%= modal("openModalRegister", form_registration) %>
+	<%= modal("openModalProfile", "Profile Modal") %>
+	<%= modal("openModalCreateEvent", form_event) %>
 <% end %>
-
 
 <script>
 	ready(function(){
 		'use strict';
 		Proactionary.hello();
+		GMaps.load();
 	});
 </script>

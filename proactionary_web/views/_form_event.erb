@@ -1,0 +1,59 @@
+<html>
+<head>
+    <script type="text/javascript">
+function showMe (box) {
+    var chboxs = document.getElementsByName("alternateChkBox");
+    var vis = "none";
+    for(var i=0;i<chboxs.length;i++) { 
+        if(chboxs[i].checked){
+         vis = "block";
+            break;
+        }
+    }
+    document.getElementById(box).style.display = vis;
+}
+    </script>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+</head>
+
+<body>
+<div >Event Creation MASTER Form(can select promoter ID)</div>
+<form method="Post" action="/create_event">
+Promoter ID: <select name="promoterID"><%= promoter_id_form %></select><br>
+Category: <select name="eventCategory"><%= promoter_category_form %></select><br>
+Name: <input maxlength="128" type="text" name="eventName" value="Enter Event Name"/> <br>
+Description: <textarea maxlength="256" name="eventDescription">Enter Event Description</textarea><br>
+Date: <input type="text" name="eventDate" id="datepicker"><br>
+Start Time: <select name="eventStartHour"><%= event_hour_form %></select>
+: <select name="eventStartMinute"><%= event_minute_form %></select>
+ <select name="eventStartPeriod">
+  <option name="eventStartPeriod" value="AM">AM</option>
+  <option name="eventStartPeriod" value="PM">PM</option>
+</select><br>
+Duration: <select name="eventDurationHour"><%= event_durationHr_form %></select> hours
+<select name="eventDurationMinute"><%= event_durationMn_form %></select> minutes<br>
+
+<input type="checkbox" name="alternateChkBox" onclick="showMe('div1')">Add Alternate Location
+<div id="div1" style="display:none">
+<input type="hidden" name="differentLocation">
+Street Address: <input maxlength="128" type="text" name="eventStreet" value="Enter Street Number"/><br>
+City: <input maxlength="128" type="text" name="eventCity" value="Enter City"/><br>
+State: <select name="eventState"><%= promoter_state_form %></select><br>
+Zip: <input maxlength="5" type="text" name="eventZip" value="Enter Zip Code"/><br>
+Country: <input maxlength="128" type="text" name="eventCountry" value="USA"/><br>
+</div>
+<br>
+<input type="submit" value="submit" />
+</form>
+</body>
+</html>
