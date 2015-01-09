@@ -29,7 +29,7 @@ li {
 	top:80px;
 	width:100%;
 	height:40px;
-	background-color:#00DFFC;
+	background-color:#020304;
 }
 
 #info-panel #filter-description {
@@ -37,7 +37,7 @@ li {
 	margin:10px 10px 10px 20px;
 	line-height:20px;
 	font-size:14px;
-	color:#343838;
+	color:#EEEEEE;
 	font-weight:bold;
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -50,7 +50,7 @@ li {
 	line-height: 20px;
 	overflow:hidden;
 	font-size:14px;
-	color:#343838;
+	color:#EEEEEE;
 	font-weight:bold;
 	text-overflow:ellipsis;
 	white-space:nowrap;
@@ -81,7 +81,7 @@ header {
 }
 
 header #top {
-	background:#005F6B;
+	background:#888888;
 	float:left;
 	height:40px;
 	line-height:40px;

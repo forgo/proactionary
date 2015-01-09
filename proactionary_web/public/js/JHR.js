@@ -17,7 +17,7 @@ var JHR = function ( url, data, fun ) {
 	
 	xhr.addEventListener( 'load',  function () {
 
-		alert(xhr.responseText);
+		// alert(xhr.responseText);
 
 		xhr.responseJSON = JSON.parse( xhr.responseText );
 		fun( xhr.responseJSON, xhr );
@@ -42,7 +42,6 @@ function isHash(obj) {
 
 function encodeParam(key,value,acc) {
 	x = (encodeURIComponent(key) + "=" + encodeURIComponent(value));
-	//alert(x);
 	return [].concat(acc,x);
 }
 
