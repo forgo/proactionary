@@ -1,3 +1,14 @@
+
+//-------------------------------------------------------------------------------
+// PROACTIONARY.COM
+//-------------------------------------------------------------------------------
+// Events.js
+// ------------------------------------------------------------------------------
+// Author: Elliott Richerson
+// Created: July 20, 2014
+// Modified: July 20, 2014
+// ------------------------------------------------------------------------------
+
 // Global Javascript Namespace of Events (Proactionary Application)
 //  check for existence and avoid clobbering existing namespace/variable
 var Events = Events === undefined ? {} : Events;
